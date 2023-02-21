@@ -115,6 +115,9 @@ function Calendar(
   const [selectedYear, setSelectedYear] = React.useState<number | undefined>(
     undefined
   )
+  const [selectedMonth, setSelectedMonth] = React.useState<number | undefined>(
+    undefined
+  )
   const [selectingYear, setSelectingYear] = React.useState<boolean>(false)
   const onPressYear = useCallback(
     (year: number) => {
@@ -171,33 +174,41 @@ function Calendar(
 
   const firstDate = startDate || date || dates?.[0]
 
+  React.useEffect(() => {
+    setSelectedYear(firstDate?.getFullYear());
+    setSelectedMonth(firstDate?.getMonth());
+  }, [firstDate?.getFullYear(), firstDate?.getMonth()]);
+
   return (
     <View style={styles.root}>
       <Swiper
         initialIndex={getInitialIndex(firstDate)}
+        selectedMonth={selectedMonth}
         selectedYear={selectedYear}
         scrollMode={scrollMode}
-        renderItem={({ index }) => (
-          <Month
-            locale={locale}
-            mode={mode}
-            key={index}
-            validRange={validRange}
-            index={index}
-            startDate={startDate}
-            endDate={endDate}
-            date={date}
-            dates={dates}
-            onPressYear={onPressYear}
-            selectingYear={selectingYear}
-            onPressDate={onPressDate}
-            scrollMode={scrollMode}
-            primaryColor={theme.colors.primary}
-            selectColor={selectColor}
-            roundness={theme.roundness}
-            disableWeekDays={disableWeekDays}
-          />
-        )}
+        renderItem={({ index }) => {
+          return (
+            <Month
+              locale={locale}
+              mode={mode}
+              key={index}
+              validRange={validRange}
+              index={index}
+              startDate={startDate}
+              endDate={endDate}
+              date={date}
+              dates={dates}
+              onPressYear={onPressYear}
+              selectingYear={selectingYear}
+              onPressDate={onPressDate}
+              scrollMode={scrollMode}
+              primaryColor={theme.colors.primary}
+              selectColor={selectColor}
+              roundness={theme.roundness}
+              disableWeekDays={disableWeekDays}
+            />
+          )
+        }}
         renderHeader={({ onPrev, onNext }) => (
           <CalendarHeader
             locale={locale}

@@ -53,6 +53,7 @@ function SwiperInner({
   renderHeader,
   renderFooter,
   selectedYear,
+  selectedMonth,
   initialIndex,
   width,
   height,
@@ -140,10 +141,11 @@ function SwiperInner({
     },
     {
       selectedYear,
+      selectedMonth,
       currentIndexRef: idx,
     }
   )
-
+  
   return (
     <>
       <ScrollView
