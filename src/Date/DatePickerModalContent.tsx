@@ -13,6 +13,7 @@ import Calendar, {
 import AnimatedCrossView from './AnimatedCrossView'
 import DatePickerModalHeader from './DatePickerModalHeader'
 import DatePickerModalContentHeader, {
+  HeaderContentProps,
   HeaderPickProps,
 } from './DatePickerModalContentHeader'
 import CalendarEdit from './CalendarEdit'
@@ -43,6 +44,7 @@ export interface DatePickerModalContentRangeProps
   endDate: CalendarDate
   onChange?: RangeChange
   onConfirm: RangeChange
+  headerContentProps?: HeaderContentProps;
 }
 
 export interface DatePickerModalContentSingleProps
@@ -164,6 +166,7 @@ export function DatePickerModalContent(
           locale={locale}
           editIcon={props?.editIcon}
           calendarIcon={props.calendarIcon}
+          {...(props as DatePickerModalContentRangeProps).headerContentProps}
         />
       </DatePickerModalHeaderBackground>
       <AnimatedCrossView
