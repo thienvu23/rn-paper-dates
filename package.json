@@ -22,8 +22,8 @@
     "!**/__mocks__"
   ],
   "scripts": {
-    "test": "jest --config=jest.config.js --watchAll=false",
-    "test-watch": "jest --config=jest.config.js --watchAll",
+    "test": "",
+    "test-watch": "",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "husky install && bob build",

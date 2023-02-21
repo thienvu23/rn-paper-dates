@@ -19,6 +19,7 @@ function Swiper({
   renderHeader,
   renderFooter,
   selectedYear,
+  selectedMonth,
   initialIndex,
 }: SwiperProps) {
   const isHorizontal = scrollMode === 'horizontal'
@@ -46,6 +47,7 @@ function Swiper({
     },
     {
       selectedYear,
+      selectedMonth,
       currentIndexRef: indexRef,
     }
   )

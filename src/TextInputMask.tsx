@@ -79,9 +79,14 @@ function TextInputWithMask(
   const [controlledValue, setControlledValue] = React.useState<string>(
     value || ''
   )
+  const keyPress = React.useRef<string>();
+
+  const onKeyPress = (e: any) => {
+    keyPress.current = e.nativeEvent.key;
+  }
 
   const onInnerChange = (text: string) => {
-    if (text.length === mask.length) {
+    if (text.length >= mask.length - 2 && keyPress.current !== 'Backspace') {
       onChangeText && onChangeText(text)
     }
     setControlledValue(text)
@@ -102,6 +107,7 @@ function TextInputWithMask(
       {...rest}
       value={controlledValue}
       onChangeText={onInnerChange}
+      onKeyPress={onKeyPress}
       onChange={(e) => {
         onChange && onChange(e)
       }}
