@@ -44,7 +44,7 @@ export interface DatePickerModalContentRangeProps
   endDate: CalendarDate
   onChange?: RangeChange
   onConfirm: RangeChange
-  headerContentProps?: HeaderContentProps;
+  headerContentProps?: Partial<HeaderContentProps>
 }
 
 export interface DatePickerModalContentSingleProps
