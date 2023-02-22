@@ -46,7 +46,7 @@ export interface DatePickerModalContentRangeProps
   endDate: CalendarDate
   onChange?: RangeChange
   onConfirm: RangeChange
-  headerContentProps?: Partial<HeaderContentProps>
+  headerContentProps?: HeaderContentProps
 }
 
 export interface DatePickerModalContentSingleProps
@@ -136,9 +136,15 @@ export function DatePickerModalContent(
     }
   }, [state, mode, onConfirm])
 
+  const headerContentRangeProps = (props as DatePickerModalContentRangeProps)
+    .headerContentProps
+
   const onToggleCollapse = React.useCallback(() => {
     setCollapsed((prev) => !prev)
-  }, [setCollapsed])
+    requestAnimationFrame(() => {
+      headerContentRangeProps?.onToggle?.()
+    })
+  }, [headerContentRangeProps])
 
   const theme = useTheme()
   const defaultUppercase = !theme.isV3
@@ -159,7 +165,6 @@ export function DatePickerModalContent(
           state={state}
           mode={mode}
           collapsed={collapsed}
-          onToggle={onToggleCollapse}
           headerSeparator={props.headerSeparator}
           emptyLabel={props.emptyLabel}
           label={props.label}
@@ -172,6 +177,7 @@ export function DatePickerModalContent(
           calendarIcon={props.calendarIcon}
           allowEditing={props.allowEditing ?? true}
           {...(props as DatePickerModalContentRangeProps).headerContentProps}
+          onToggle={onToggleCollapse}
         />
       </DatePickerModalHeaderBackground>
       <AnimatedCrossView

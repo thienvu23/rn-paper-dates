@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, StyleProp, TextStyle } from 'react-native'
 import { IconButton, MD2Theme, Text, useTheme } from 'react-native-paper'
 import type { ModeType } from './Calendar'
 import type { LocalState } from './DatePickerModalContent'
@@ -30,6 +30,8 @@ export interface HeaderContentProps extends HeaderPickProps {
   locale: string | undefined
   onPressValueLabelStart?: () => void;
   onPressValueLabelEnd?: () => void;
+  valueLabelStartStyle?: StyleProp<TextStyle>
+  valueLabelEndStyle?: StyleProp<TextStyle>
 }
 
 function getLabel(
@@ -210,7 +212,9 @@ export function HeaderContentRange({
   endLabel = 'End',
   color,
   onPressValueLabelStart,
-  onPressValueLabelEnd
+  onPressValueLabelEnd,
+  valueLabelStartStyle,
+  valueLabelEndStyle
 }: HeaderContentProps & { color: string }) {
   const theme = useTheme()
   const formatter = React.useMemo(() => {

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Platform } from 'react-native';
 
 import TextInputWithMask from '../TextInputMask'
 import { HelperText, useTheme } from 'react-native-paper'
@@ -85,7 +86,7 @@ function DatePickerInputWithoutModal(
               withDateFormatInLabel,
             })}
             value={formattedValue}
-            keyboardType={rest.keyboardType ?? 'number-pad'}
+            keyboardType={rest.keyboardType ?? Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'number-pad'}
             mask={inputFormat}
             disabled={disabled}
             onChangeText={onDateInputChangeText}
