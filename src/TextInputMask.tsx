@@ -66,6 +66,9 @@ function enhanceTextWithMask(
   return finalString.join(splitCharacter)
 }
 
+const regexMask = RegExp(/\W+/g);
+const regexText = RegExp(/\D+/g);
+
 function TextInputWithMask(
   {
     onChangeText,
@@ -79,6 +82,7 @@ function TextInputWithMask(
   const [controlledValue, setControlledValue] = React.useState<string>(
     value || ''
   )
+  const countCharOfMask = React.useRef(mask.match(regexMask)?.length || 0);
   const keyPress = React.useRef<string>();
 
   const onKeyPress = (e: any) => {
@@ -86,7 +90,9 @@ function TextInputWithMask(
   }
 
   const onInnerChange = (text: string) => {
-    if (text.length >= mask.length - 2 && keyPress.current !== 'Backspace') {
+    const countNotDigitText = text.match(regexText)?.length || 0;
+
+    if ((text.length >= mask.length - (countCharOfMask.current - countNotDigitText)) && keyPress.current !== 'Backspace') {
       onChangeText && onChangeText(text)
     }
     setControlledValue(text)
