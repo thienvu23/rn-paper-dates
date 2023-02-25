@@ -28,6 +28,6 @@ export default function DatePickerModalHeaderBackground({
 
 const styles = StyleSheet.create({
   animated: {
-    elevation: 4,
+//     elevation: 4,
   },
 })
