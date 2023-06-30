@@ -27,12 +27,18 @@ export default function YearPicker({
 
   // scroll to selected year
   React.useEffect(() => {
-    if (flatList.current && selectedYear) {
-      const indexToGo = selectedYear - startYear
-      flatList.current.scrollToOffset({
-        offset: (indexToGo / 3) * ITEM_HEIGHT - ITEM_HEIGHT,
-        animated: false,
-      })
+    const id = requestAnimationFrame(() => {
+      if (flatList.current && selectedYear) {
+        const indexToGo = selectedYear - startYear
+        flatList.current.scrollToOffset({
+          offset: (indexToGo / 3) * ITEM_HEIGHT - ITEM_HEIGHT,
+          animated: false,
+        })
+      }
+    })
+
+    return () => {
+      cancelAnimationFrame(id);
     }
   }, [flatList, selectedYear, startYear])
 
