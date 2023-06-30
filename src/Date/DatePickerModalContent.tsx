@@ -48,7 +48,6 @@ export interface DatePickerModalContentRangeProps
   onConfirm: RangeChange
   headerContentProps?: Partial<HeaderContentProps>
 }
-
 export interface DatePickerModalContentSingleProps
   extends HeaderPickProps,
     BaseCalendarProps,

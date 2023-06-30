@@ -28,8 +28,8 @@ export interface HeaderContentProps extends HeaderPickProps {
   collapsed: boolean
   onToggle: () => any
   locale: string | undefined
-  onPressValueLabelStart?: () => void;
-  onPressValueLabelEnd?: () => void;
+  onPressValueLabelStart?: () => void
+  onPressValueLabelEnd?: () => void
   valueLabelStartStyle?: StyleProp<TextStyle>
   valueLabelEndStyle?: StyleProp<TextStyle>
 }
@@ -214,7 +214,7 @@ export function HeaderContentRange({
   onPressValueLabelStart,
   onPressValueLabelEnd,
   valueLabelStartStyle,
-  valueLabelEndStyle
+  valueLabelEndStyle,
 }: HeaderContentProps & { color: string }) {
   const theme = useTheme()
   const formatter = React.useMemo(() => {
@@ -241,7 +241,11 @@ export function HeaderContentRange({
       <Text
         onPress={onPressValueLabelStart}
         maxFontSizeMultiplier={1.5}
-        style={[styles.rangeHeaderText, { color: startColor }]}
+        style={[
+          styles.rangeHeaderText,
+          { color: startColor },
+          valueLabelStartStyle,
+        ]}
       >
         {state.startDate ? formatter.format(state.startDate) : startLabel}
       </Text>
@@ -254,7 +258,11 @@ export function HeaderContentRange({
       <Text
         onPress={onPressValueLabelEnd}
         maxFontSizeMultiplier={1.5}
-        style={[styles.rangeHeaderText, { color: endColor }]}
+        style={[
+          styles.rangeHeaderText,
+          { color: endColor },
+          valueLabelEndStyle,
+        ]}
       >
         {state.endDate ? formatter.format(state.endDate) : endLabel}
       </Text>

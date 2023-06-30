@@ -11,9 +11,6 @@ function escapeForRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-const regexMask = RegExp(/\W+/g);
-const regexText = RegExp(/\D+/g);
-
 function TextInputWithMask(
   {
     onChangeText,
@@ -28,7 +25,6 @@ function TextInputWithMask(
   const [controlledValue, setControlledValue] = React.useState<string>(
     value || ''
   )
-  const countCharOfMask = React.useRef(mask.match(regexMask)?.length || 0);
   const keyPress = React.useRef<string>();
 
   const onKeyPress = (e: any) => {
