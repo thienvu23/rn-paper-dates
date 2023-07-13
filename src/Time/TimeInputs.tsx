@@ -28,6 +28,8 @@ function TimeInputs({
   onChange,
   is24Hour,
   inputFontSize,
+  minutesLabel,
+  hoursLabel,
 }: {
   inputType: PossibleInputTypes
   focused: PossibleClockTypes
@@ -41,6 +43,8 @@ function TimeInputs({
   }) => any
   is24Hour: boolean
   inputFontSize?: number
+  minutesLabel?: string
+  hoursLabel?: string
 }) {
   const startInput = React.useRef<TextInputNative | null>(null)
   const endInput = React.useRef<TextInputNative | null>(null)
@@ -113,7 +117,7 @@ function TimeInputs({
         />
         {inputType === 'keyboard' ? (
           <Text maxFontSizeMultiplier={1.5} variant="bodySmall">
-            Hour
+            {hoursLabel || 'Hour'}
           </Text>
         ) : null}
       </View>
@@ -178,7 +182,7 @@ function TimeInputs({
         />
         {inputType === 'keyboard' ? (
           <Text maxFontSizeMultiplier={1.5} variant="bodySmall">
-            Minute
+            {minutesLabel || 'Minute'}
           </Text>
         ) : null}
       </View>

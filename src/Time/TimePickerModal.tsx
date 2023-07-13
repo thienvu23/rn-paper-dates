@@ -57,6 +57,8 @@ export function TimePickerModal({
   clockIcon = 'clock-outline',
   use24HourClock,
   inputFontSize,
+  hoursLabel,
+  minutesLabel,
 }: {
   locale?: undefined | string
   label?: string
@@ -73,6 +75,8 @@ export function TimePickerModal({
   clockIcon?: string
   use24HourClock?: boolean
   inputFontSize?: number
+  minutesLabel?: string
+  hoursLabel?: string
 }) {
   const theme = useTheme()
 
@@ -102,11 +106,12 @@ export function TimePickerModal({
 
   React.useEffect(() => {
     setLocalHours(getHours(hours))
-  }, [setLocalHours, hours])
+    // visible force reset value when visible change
+  }, [setLocalHours, hours, visible])
 
   React.useEffect(() => {
     setLocalMinutes(getMinutes(minutes))
-  }, [setLocalMinutes, minutes])
+  }, [setLocalMinutes, minutes, visible])
 
   const onFocusInput = React.useCallback(
     (type: PossibleClockTypes) => setFocused(type),
@@ -200,6 +205,8 @@ export function TimePickerModal({
                   minutes={localMinutes}
                   onChange={onChange}
                   onFocusInput={onFocusInput}
+                  hoursLabel={hoursLabel}
+                  minutesLabel={minutesLabel}
                 />
               </View>
               <View style={styles.bottom}>

@@ -38,6 +38,8 @@ function TimePicker({
   locale,
   use24HourClock,
   inputFontSize,
+  hoursLabel,
+  minutesLabel,
 }: {
   locale?: undefined | string
   inputType: PossibleInputTypes
@@ -48,6 +50,8 @@ function TimePicker({
   onChange: onChangeFunc
   use24HourClock?: boolean
   inputFontSize?: number
+  minutesLabel?: string
+  hoursLabel?: string
 }) {
   const [displayMode, setDisplayMode] = React.useState<'AM' | 'PM' | undefined>(
     undefined
@@ -118,6 +122,8 @@ function TimePicker({
           onChange={onChange}
           onFocusInput={onFocusInput}
           focused={focused}
+          hoursLabel={hoursLabel}
+          minutesLabel={minutesLabel}
         />
         {inputType === inputTypes.picker ? (
           <View style={styles.clockContainer}>
