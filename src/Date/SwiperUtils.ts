@@ -32,28 +32,29 @@ export function useYearChange(
     currentIndexRef,
   }: {
     currentIndexRef: MutableRefObject<number>
-    selectedMonth: number | undefined,
+    selectedMonth: number | undefined
     selectedYear: number | undefined
   }
 ) {
   const onChangeRef = useLatest(onChange)
+  const selectedMonthRef = useLatest(selectedMonth)
   React.useEffect(() => {
     if (selectedYear) {
       const currentIndex = currentIndexRef.current || 0
       let currentDate = addMonths(new Date(), getRealIndex(currentIndex))
 
       currentDate.setFullYear(selectedYear)
-      if(selectedMonth) currentDate.setMonth(selectedMonth);
-      
+      if (selectedMonthRef.current)
+        currentDate.setMonth(selectedMonthRef.current)
+
       const today = new Date()
       const months = differenceInMonths(today, currentDate)
-      
+
       const newIndex = startAtIndex + months
-      
+
       if (currentIndex !== newIndex) {
         onChangeRef.current(newIndex)
       }
     }
-  }, [currentIndexRef, onChangeRef, selectedYear, selectedMonth])
+  }, [currentIndexRef, onChangeRef, selectedYear, selectedMonthRef])
 }
-
